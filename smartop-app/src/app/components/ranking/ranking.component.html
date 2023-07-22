@@ -1,0 +1,163 @@
+<div class="flex w-full justify-center m-4">
+  <input
+    class="h-11 py-3 px-4 w-2/3 min-w-[200px] block border-2 border-blue-500 rounded-md text-sm focus:border-blue-900 focus:ring-blue-900"
+    placeholder="Recherche un chirurgien par son nom"
+    type="text"
+    (keyup)="applyFilter($event)"
+  />
+</div>
+
+<div
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="50"
+  (scrolled)="onScroll()"
+  class="flex flex-col mx-auto max-w-screen-lg"
+>
+  <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+    <div
+      class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8 overflow-x-hidden"
+    >
+      <div
+        class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+      >
+        <!-- La table pour afficher les informations sur les chirurgiens -->
+        <table
+          mat-table
+          [dataSource]="ranking"
+          class="table-auto divide-y divide-gray-200"
+        >
+          <!-- La colonne pour le nom du chirurgien -->
+          <ng-container matColumnDef="surgeon">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Chirurgien
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="px-6 py-4 whitespace-nowrap"
+            >
+              <!-- Le nom du chirurgien -->
+              {{ element.surgeon }}
+            </td>
+          </ng-container>
+
+          <!-- Specialty Column -->
+          <ng-container matColumnDef="specialty">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Spécialité
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="px-6 py-4 whitespace-nowrap"
+            >
+              {{ element.specialty }}
+            </td>
+          </ng-container>
+
+          <!-- Number of Interventions Column -->
+          <ng-container matColumnDef="numInterventions">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Nombre d'interventions
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="px-6 py-4 whitespace-nowrap"
+            >
+              {{ element.numInterventions }}
+            </td>
+          </ng-container>
+
+          <!-- Favorite Anesthetist Column -->
+          <ng-container matColumnDef="favoriteAnesthetist">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Anesthésiste Favori
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="px-6 py-4 whitespace-nowrap"
+            >
+              {{ element.favoriteAnesthetist }}
+            </td>
+          </ng-container>
+
+          <!-- Favorite Nurse Column -->
+          <ng-container matColumnDef="favoriteNurse">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Infirmière Favorite
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="px-6 py-4 whitespace-nowrap"
+            >
+              {{ element.favoriteNurse }}
+            </td>
+          </ng-container>
+
+          <!-- Frequent Room Column -->
+          <ng-container matColumnDef="frequentRoom">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Salle La Plus Fréquente
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="px-6 py-4 whitespace-nowrap"
+            >
+              {{ element.frequentRoom }}
+            </td>
+          </ng-container>
+
+          <!-- Frequent Procedure Column -->
+          <ng-container matColumnDef="frequentProcedure">
+            <th
+              mat-header-cell
+              *matHeaderCellDef
+              class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+            >
+              Acte Le Plus Fréquent
+            </th>
+            <td
+              mat-cell
+              *matCellDef="let element"
+              class="px-6 py-4 whitespace-nowrap"
+            >
+              {{ element.frequentProcedure }}
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
