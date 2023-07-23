@@ -14,7 +14,7 @@ app.use(cors());
 
 // Connexion à la base de données MongoDB
 mongoose
-  .connect("mongodb://localhost/hospitalDB", {
+  .connect("mongodb+srv://Proton:%5eo%407%21%21q6GnJZig%23HMceD8Xqum4%26HzM@cluster0.a6bbqim.mongodb.net/hospitalDB?retryWrites=true&w=majority", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
