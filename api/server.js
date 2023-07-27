@@ -3,6 +3,9 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+// Importation des variables d'environnement
+require("dotenv").config();
+
 // Importation des routeurs
 const interventionsRouter = require("./routes/interventions");
 
@@ -14,7 +17,7 @@ app.use(cors());
 
 // Connexion à la base de données MongoDB
 mongoose
-  .connect("mongodb+srv://Proton:%5eo%407%21%21q6GnJZig%23HMceD8Xqum4%26HzM@cluster0.a6bbqim.mongodb.net/hospitalDB?retryWrites=true&w=majority", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -25,6 +28,6 @@ mongoose
 app.use("/api/interventions", interventionsRouter);
 
 // Démarrage du serveur
-app.listen(3000, () => {
-  console.log("Server is running on http://localhost:3000");
+app.listen(process.env.PORT, () => {
+  console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
